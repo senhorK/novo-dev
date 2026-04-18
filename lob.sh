@@ -1,9 +1,3 @@
-#!/bin/bash
-
-echo "🚀 Atualizando projeto..."
-
-
-
 RED="\e[31m"
 GREEN="\e[32m"
 BLUE="\e[34m"
@@ -22,7 +16,7 @@ echo "║        Upgrade do Novo Dev           ║"
 echo "╠══════════════════════════════════════╣"
 echo "║                                      ║"
 echo "║                                      ║"
-echo "║    ️⚠️        LOGIN INFOR              ║"
+echo "║    🖥️        LOGIN INFOR              ║"
 echo "║                                      ║"
 echo "║                                      ║"
 echo "║                                      ║"
@@ -42,26 +36,3 @@ echo "╚═══════════════════════�
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-git add .
-
-echo "📝 Mensagem do commit:"
-read msg
-
-git commit -m "$msg"
-git push origin main
-
-echo "✅ Atualizado com sucesso!"
