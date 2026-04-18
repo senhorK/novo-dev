@@ -243,43 +243,43 @@ body {
 }
 
 #pintar{
-    background: url(/icon/pintar.svg) no-repeat center;  
+    background: url(./icon/pintar.svg) no-repeat center;  
     background-size: contain;
 }
 #apagar{
-    background: url(/icon/apagar.svg) no-repeat center;
+    background: url(./icon/apagar.svg) no-repeat center;
     background-size: contain;
 }
 #grid{
-   background: url(/icon/gride.svg) no-repeat center;
+   background: url(./icon/gride.svg) no-repeat center;
    background-size: contain;
 }
 #seletColisao{
-   background: url(/icon/parede.svg) no-repeat center;
+   background: url(./icon/parede.svg) no-repeat center;
    background-size: contain;
 }
 #mover {
-    background: url(/icon/mover.svg) no-repeat center;
+    background: url(./icon/mover.svg) no-repeat center;
     background-size: contain;
 }
 #novo {
-    background: url(/icon/novo.svg) no-repeat center;
+    background: url(./icon/novo.svg) no-repeat center;
     background-size: contain;
 }
 #balde {
-    background: url(/icon/balde.svg) no-repeat center;
+    background: url(./icon/balde.svg) no-repeat center;
     background-size: contain;
 }
 #loadMap {
-    background: url(/icon/loadMap.svg) no-repeat center;
+    background: url(./icon/loadMap.svg) no-repeat center;
     background-size: contain;
 }
 #salvar {
-    background: url(/icon/salvar.svg) no-repeat center;
+    background: url(./icon/salvar.svg) no-repeat center;
     background-size: contain;
 }
 #apagarAll {
-    background: url(/icon/apagarAll.svg) no-repeat center;
+    background: url(./icon/apagarAll.svg) no-repeat center;
     background-size: contain;
 }
 
