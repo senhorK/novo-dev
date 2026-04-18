@@ -1,0 +1,22 @@
+<!-- Ícone FILE / ARQUIVO com 2 cores -->
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 24 24"
+     width="24"
+     height="24">
+
+  <!-- Corpo do arquivo -->
+  <path
+    fill="#ffffff"
+    d="M6 2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"/>
+
+  <!-- Dobra da folha -->
+  <path
+    fill="#4FC3F7"
+    d="M15 2v5h5L15 2z"/>
+
+  <!-- Linhas internas -->
+  <path
+    fill="#B0BEC5"
+    d="M8 11h8v1H8v-1zm0 3h8v1H8v-1zm0 3h6v1H8v-1z"/>
+
+</svg>

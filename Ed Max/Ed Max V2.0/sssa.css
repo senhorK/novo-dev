@@ -1,0 +1,273 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #000000;
+    overflow: hidden;
+    font-family: Arial;
+}
+
+
+
+.Criar{
+    display:none;
+}
+
+.Criar.ativo{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100vh;
+
+    background:rgba(0,0,0,0.7); /* overlay melhor */
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    z-index:1000;
+}
+
+/* Caixa principal */
+.Criar ul{
+    list-style:none;
+    background:#161b22;
+    padding:20px;
+    border-radius:15px;
+
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+
+    width:90%;
+    max-width:350px;
+
+    box-shadow:0 10px 40px rgba(0,0,0,.5);
+}
+
+/* Inputs */
+.Criar li{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.Criar input{
+    width:90px;
+    padding:10px;
+    border:none;
+    border-radius:8px;
+    background:#21262d;
+    color:white;
+    outline:none;
+}
+
+/* foco no input */
+.Criar input:focus{
+    box-shadow:0 0 0 2px #58a6ff;
+}
+
+/* Texto */
+.Criar p{
+    color:#c9d1d9;
+    font-size:14px;
+}
+
+/* Box de imagem */
+.Criar .boxImg{
+    width: 100%;
+    height: 300px;
+    overflow-y:auto;
+    background:#0d1117;
+    border-radius:10px;
+    
+    
+}
+
+/* Imagens */
+.Criar .boxImg img{
+    width: 30%;
+    margin: 5px;
+    border-radius: 8px;
+    border: 1px solid #30363d;
+    cursor: pointer;
+    transition:.2s;
+}
+
+.Criar .boxImg img:hover{
+    border-color:#58a6ff;
+    transform:scale(1.02);
+}
+
+/* Botão */
+.Criar button{
+    margin-top:10px;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    background:linear-gradient(135deg,#58a6ff,#7c3aed);
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.Criar button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 5px 20px rgba(88,166,255,.4);
+}
+
+
+/* Área principal */
+.lay1 {
+    position: absolute;
+    
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    
+    background: #0d1117;
+}
+
+/* Canvas principal */
+.lay1 canvas {
+    background: transparent;
+    
+    image-rendering: pixelated;
+}
+
+/* Paleta lateral */
+/*.lay2 {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 25%;
+    height: calc(100vh - 80px);
+    background: #161b22;
+    border-left: 2px solid #222;
+}*/
+.lay2 {
+    position: absolute;
+    top: 51%;
+    
+    left: 0;
+    width: 70%;
+    height:  35%;
+    background: #161b22;
+    border-left: 2px solid #222;
+}
+/* Canvas da paleta */
+.lay2 canvas {
+    background: #C9E9FF70;
+    image-rendering: pixelated;
+}
+
+.p1{
+    position: absolute;
+    right: 10px;
+    top: 51%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    text-decoration: none;
+    list-style: none;
+    color: #FFFFFF;
+}
+.p1 b{
+    flex: 1;
+    color: #52FFB7;
+}
+
+
+
+
+/* Menu inferior */
+.menu1 {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background: #161b22;
+    padding: 10px;
+}
+
+/* Grid do menu */
+.menu1 ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 10px;
+    height: 100%;
+}
+
+/* Botões */
+.menu1 li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #21262d;
+    border-radius: 10px;
+    color: #c9d1d9;
+    cursor: pointer;
+    transition: .3s;
+}
+
+/* Hover */
+.menu1 li:hover {
+    background: #535353;
+    color: white;
+}
+
+.menu1 li.ativo{
+    background: #58a6ff;
+    color: white;
+}
+
+
+.boot{
+    display: none;
+}
+.boot.ativo{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #FFFFFF;
+    background: #303030;
+}
+#bootP{
+    font-size:22px;
+    letter-spacing:2px;
+    color:#c9d1d9;
+    animation:pulse 1.5s infinite;
+}
+.boot span{
+    width: 0px;
+    height: 2px;
+    border-radius: 10px;
+    height:6px;
+    background: #72B3FF;
+}
+
+
+
+@keyframes pulse{
+    0%{opacity:0.4}
+    50%{opacity:1}
+    100%{opacity:0.4}
+}
+

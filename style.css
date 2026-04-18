@@ -1,0 +1,297 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    
+    background: #0d1117;
+}
+
+header {
+    width: 100%;
+    padding: 18px 40px;
+    /*background: #161b22;*/
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    
+    background:
+    radial-gradient(circle at top left, #58a6ff33, transparent 40%),
+    radial-gradient(circle at bottom right, #7c3aed33, transparent 40%),
+    #0d1117;
+}
+/*.logo {
+    font-size: 28px;
+    font-weight: bold;
+    color: #58a6ff;
+    cursor: pointer;
+    letter-spacing: 5px;
+}*/
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:Arial, sans-serif;
+    font-weight:bold;
+    font-size:26px;
+    user-select:none;
+}
+
+/* Ícone */
+ .icon{
+    width:42px;
+    height:42px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:12px;
+    background:linear-gradient(135deg,#58a6ff,#7c3aed);
+    color:white;
+    font-size:18px;
+    box-shadow:0 4px 15px rgba(88,166,255,.35);
+}
+
+/* Texto */
+.logo .text{
+    background:linear-gradient(90deg,#58a6ff,#7c3aed);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+nav {
+    display: flex;
+    gap: 25px;
+}
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 13px;
+    position: relative;
+    transition: .3s;
+}
+nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0%;
+    height: 2px;
+    background: #58a6ff;
+    transition: .3s;
+}
+nav a:hover {
+    color: #58a6ff;
+}
+nav a:hover::after {
+    width: 100%;
+}
+
+
+
+
+
+.hero{
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding:80px;
+    
+    background:
+    radial-gradient(circle at top left, #58a6ff33, transparent 40%),
+    radial-gradient(circle at bottom right, #7c3aed33, transparent 40%),
+    #0d1117;
+    color:white;
+}
+
+/* Título */
+.hero h2{
+    font-size: 40px;
+    max-width: 700px;
+    line-height: 1;
+    margin-bottom: 20px;
+}
+
+/* Destaque no título (opcional se usar span) */
+.hero h2 span{
+    color:#58a6ff;
+}
+
+/* Texto */
+.hero p{
+    font-size: 15px;
+    max-width: 550px;
+    color: #c9d1d9;
+    margin-bottom: 50px;
+}
+
+/* Botão */
+.hero button{
+    padding:16px 34px;
+    border:none;
+    border-radius:12px;
+    background:linear-gradient(135deg,#58a6ff,#7c3aed);
+    color:white;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.hero button:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 25px rgba(88,166,255,.3);
+}
+
+
+
+
+.layCard{
+    padding:80px 40px;
+    background:#0d1117;
+    color:white;
+}
+
+/* Título */
+.layCard h2{
+    text-align:center;
+    font-size:42px;
+    margin-bottom:40px;
+}
+
+/* Grid dos cards */
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:25px;
+    max-width:1200px;
+    margin:auto;
+}
+
+/* Card */
+.card{
+    display: flex;
+    flex-direction: column;
+    background:#161b22;
+    padding:30px;
+    border-radius:18px;
+    border:1px solid rgba(255,255,255,.05);
+    transition:.3s;
+    cursor:pointer;
+    position:relative;
+    overflow:hidden;
+}
+
+/* Glow decorativo */
+.card::before{
+    content:"";
+    position:absolute;
+    top:-50%;
+    left:-50%;
+    width:200%;
+    height:200%;
+    background:radial-gradient(circle,#58a6ff22,transparent 60%);
+    opacity:0;
+    transition:.4s;
+}
+
+/* Hover */
+.card:hover{
+    transform:translateY(-8px);
+    border-color:#58a6ff55;
+    box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
+
+.card:hover::before{
+    opacity:1;
+}
+
+/* Conteúdo */
+.card h3{
+    font-size:24px;
+    margin-bottom:15px;
+    position:relative;
+    z-index:1;
+}
+
+.card a,p{
+    color:#c9d1d9;
+    line-height:1.6;
+    position:relative;
+    z-index:1;
+}
+
+.card a{
+    line-heigh: 2;  
+    position: relative;
+    z-index: 1;
+}
+
+.card .inPro.ativo{
+    line-height: 2;
+    position: relative;
+    z-index: 1;
+    color: #2af65d;
+    font-size: 10px;
+}
+.card .inPro{
+    line-height: 2;  
+    position: relative;
+    z-index: 1;
+    color: #f63e2a;
+    font-size: 10px;
+}
+
+.card .inPro b{
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    right: 0px;
+    
+    border-radius: 100%;
+    background: #2af65d;
+}
+
+
+
+
+
+footer {
+    background: #161b22;
+    padding: 30px 20px;
+    text-align: center;
+    color: #c9d1d9;
+    margin-top: 60px;
+}
+
+.footer-links {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.footer-links a {
+    color: #58a6ff;
+    text-decoration: none;
+    transition: .3s;
+}
+
+.footer-links a:hover {
+    color: white;
+}
+
+
+.layPro{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background: #7c3aed33;
+}
