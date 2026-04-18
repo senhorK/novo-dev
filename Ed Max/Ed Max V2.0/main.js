@@ -6,7 +6,10 @@ const p1 = document.querySelector(".p1");
 
 var modo = "pintar"
 function bug() {
-    p1.innerHTML = `modo: ${modo}`
+    p1.innerHTML = `
+    modo: ${modo}
+    
+    `
    /*p1.innerHTML = `
        
       <li> isLoad: <b>${status.isLaod}</b></li> 
@@ -663,6 +666,10 @@ const delegar = {
      }
      else  
      if(nome === "ver data") app.show(".layText");
+     else
+     if(nome === "Salvar Imagem"){
+       
+     }
      else  
      if (nome === "sair") app.hide(".opsMap");
      
@@ -673,6 +680,13 @@ const delegar = {
      
      
      //alert(data.data[idx].nome)
+   },
+   
+   baixarCanvas(canvas){
+      const link = document.createElement("a");
+            link.download = "mapa.png"; // nome do arquivo
+            link.href = canvas.toDataURL("image/png");
+            link.click();
    }
 }
 
@@ -687,7 +701,7 @@ class Super {
      this.mapFeito  = document.querySelector(".mapFeito")
      this.layText   = document.querySelector(".layText")
      this.opsMap  = document.querySelector(".opsMap")
-     
+     this.Download = document.querySelector(".Download")
      
      
      mundo  = new Mundo();
@@ -722,7 +736,9 @@ class Super {
   Event(){
      
      
-     
+     this.Download.addEventListener("click", (e)=>{
+       delegar["baixarCanvas"](mundo.ctx.canvas)
+     });
      this.Criar.addEventListener("click", (e)=>{
         const tag = e.target.tagName;
         const cla = e.target.className;
