@@ -1,0 +1,17 @@
+<!-- Ícone APAGAR / BORRACHA com 2 cores -->
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 24 24"
+     width="24"
+     height="24">
+
+  <!-- Corpo da borracha -->
+  <path
+    fill="#ffffff"
+    d="M16.24 3.56a2 2 0 0 0-2.83 0L3.56 13.41a2 2 0 0 0 0 2.83l4.2 4.2A2 2 0 0 0 9.17 21h8.41c.27 0 .52-.11.71-.29l3.71-3.71a2 2 0 0 0 0-2.83l-5.76-5.61z"/>
+
+  <!-- Parte apagando -->
+  <path
+    fill="#4FC3F7"
+    d="M9.17 19l-4.2-4.2 5.8-5.8 4.2 4.2-5.8 5.8z"/>
+
+</svg>

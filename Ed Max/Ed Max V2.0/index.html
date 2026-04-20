@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>HTML</title>
+  
+  <!-- HTML -->
+  
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+   <!-- lay1 box do premeiro canvas onde 
+        var ter o mundo tiles 
+        
+        lay2 box do segundo canvas onde vai ter a paleta de cores ou 
+        imagem tilesheet
+   -->
+  <div class="lay1" id="lay1"> <canvas class="canvas1"></canvas></div>
+  <div class="lay2" id="lay2"> <canvas class="canvas2"></canvas></div>
+
+
+  <div class="p1">info</div>
+  <div class="Download">Download</div>
+  <div class="Criar">
+  	 
+  	 
+  	 <ul>
+  	 	   <li>
+  	 	    	  <input type="number" name="" id="sizeIp" value="16" />
+						  <p>Size</p>
+				  </li>
+  	 	   
+  	 	   <li>
+  	 	   	  <input type="number" name="" id="linhaIp" value="30" />
+  	 	   	  <p>Linhas</p>
+  	 	   </li>
+  	 	   
+  	 	   <li>
+  	 	   	  <input type="number" name="" id="colunaIp" value="30" />
+  	 	   	  <p>Colunas</p>
+  	 	   </li>
+  	 	   
+  	 	   
+  	 	   
+  	 	   <div class="boxImg"></div>
+  	 	   	
+  	 	   	<button class="criarBtn">Ok</button>
+  	 	    
+	  </ul>
+  </div>
+  
+
+  
+  
+  <!-- menu de opções do editor de tile-->
+  <div class="menu1">
+    <ul>
+       <li id="pintar" class="ativo"></li>
+       <li id="apagar"></li>
+       <li id="grid" class="ativo"></li>
+       <select id="seletColisao">
+          <option value="nao">colid não</option>
+          <option value="sim">colid sim</option>
+       </select>
+       <li id="mover"></li>
+       <li id="novo"></li>
+       <li id="balde"></li>
+       
+       <li id="loadMap"></li>
+       <li id="salvar"></li>
+       <li id="apagarAll"></li>
+       
+    </ul>
+  </div>
+
+
+
+<div class="opsMap" data-x="opsMap">
+  <ul>
+    <li>apagar</li>
+    <li>renomear</li>
+    <li>ver data</li>
+    <li>sair</li>
+  </ul>
+</div>
+<div class="propt">
+  <p>nome</p>
+  <div class="box1"><input type="text" placeholder="nome do map..." /></div>
+  <div class="box2">
+    <button id="proptKil">cancelar</button>
+    <button id="proptOk">ok</button>
+  </div>
+</div>
+
+
+
+<div class="loadMapas">
+    <ul>
+      
+    </ul>
+    
+    
+    <button class="mapFeito">feito</button>
+ </div>
+ 
+ 
+ 
+<div class="layText">
+  <textarea id="txtMapa"></textarea>
+  <pre id="preJson"></pre>
+  
+  <div class="btns">
+    <button id="copiar">Copiar</button>
+    <button id="fechar">Fechar</button>
+  </div>
+</div>
+<div class="boot ativo">
+   
+      <p id="bootP">carregando</p>
+      <span id="bootS" class="spinner"></span>
+
+ </div>
+
+
+
+
+  <script src="./js/bootLoad.js"></script>
+  <!--script src="main.js"></script-->
+</body>
+</html>

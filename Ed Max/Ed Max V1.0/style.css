@@ -1,0 +1,287 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+
+
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  touch-action: none; /* impede rolagem em dispositivos touch */
+  background: #2A2A2A;
+    
+}
+
+
+#lay1{
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    overflow: hidden;
+    background: #393939;
+}
+
+
+
+#lay1 canvas{
+     position: absolute;
+     image-rendering: pixelated;
+     background: #767676;
+}
+
+
+
+#lay2{
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    top: 60%;
+    overflow: hidden;
+    background: #393939;
+}
+
+
+
+#lay2 canvas{
+     position: absolute;
+     image-rendering: pixelated;
+}
+
+
+#p1{
+    position: absolute;
+    top: 57%;
+    left: 30px;
+    font-size: 10px;
+    color: #25FF71;
+}
+#p2 {
+    position: absolute;
+    top: 60%;
+    left: 210px;
+    font-size: 10px;
+    color: #25FF71;
+}
+
+
+
+#laychek{
+    position: absolute;
+    width: 100px;
+    height: 80px;
+    top: 35%;
+    left: 30%;
+    color: #FFFFFF;
+    border-radius: 10px;
+    background: #515151;
+    display: none;
+}
+#laychek.ativo{
+    display: block;
+}
+
+#laychek button{
+    margin-left: 25px;
+    margin-top: 15px;
+    width: 60px;
+}
+
+#laychek button.ativo{
+    color: #FFFFFF;
+    background: #4C4C4C;
+}
+
+
+
+.lsBtn{
+    position: absolute;
+    width: 100%;
+    height: 40px;
+    top: 50%;
+    background: #5E5E5E;
+}
+
+
+.lsBtn button{
+    width: 50px;
+    height: 30px;
+    border-radius: 10px;
+}
+
+.lsBtn button.ativo{
+    color: #FFFFFF;
+    background: #4C4C4C;
+}
+
+
+
+
+
+
+
+
+
+.Opem{
+    position: absolute;
+    width: 20px;
+    height: 100px;
+    bottom: 200px;
+    right: 0px;
+    color: #FFFFFF;
+    background: #2D2D2D
+}
+
+
+
+
+
+
+
+
+.MENU{
+    position: absolute;
+    width: 80%;
+    height: 40%;
+    bottom: 0;
+    left: -80%;
+    background: #16FF03;
+    transition: .2s linear;
+}
+.MENU.ativo{
+    left: 0px;
+}
+
+.MENU ul{
+    position: absolute;
+    width: 30%;
+    height: 100%;
+    background: #8E8E8E;
+}
+.MENU ul li{
+    
+    list-style: none;
+    margin-left: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    color: #000;
+}
+
+.MENU .btnLi li:hover{
+    background: #4B4B4B;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+
+.MENU div{
+    position: absolute;
+    width: 69%;
+    height: 100%;
+    right: 0;
+    background: #3F3F3F;
+    top: 0;
+    display: none;
+}
+.MENU div.ativo{
+    display: block;
+}
+
+
+
+#aba1 .ul1{
+    position: absolute;
+    width: 30%;
+    height: 100%;
+    font-size: 10px;
+}
+
+#aba1 .ul1 input{
+    text-align: center;
+    width: 50px;
+    margin-left: 5px;
+}
+
+
+#aba1 .ul2{
+    position: absolute;
+    right: 0;
+    width: 60%;
+    height: 100%;
+    
+    overflow-x: hidden;
+    overflow-y: scroll;
+    background: #344234
+}
+#aba1 .ul2 li{
+    width: 100px;
+    height: 100px;
+    margin-top: 10px;
+    margin-left: 13%;
+    overflow: hidden;
+    background: #969696;
+    background-size: cover;
+}
+
+#aba1 .ul2 li:hover{
+    box-shadow: 0 0px 0px 5px #40FF06;
+}
+
+#aba1 button{
+    width: 40px;
+    height: 40px;
+    margin-left: 5px;
+    border-radius: 40px;
+    background: #42445A;
+    color: #FFFFFF;
+}
+
+
+
+.laySalvar{
+    position: absolute;
+    width: 150px;
+    height: 80px;
+    top: 38%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    border-radius: 10px;
+    background: #515151;
+    display: none;
+}
+
+.laySalvar.ativo{
+    display: block;
+}
+
+.laySalvar input{
+    width: 80%;
+    margin-top: 10px;
+}
+.laySalvar button{
+    width: 40px;
+    height: 20px;
+}
+
+
+
+#aba2 ul{
+    width: 40%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+#aba2 ul li:hover{
+    background: #4B4B4B;
+    color: #FFFFFF;
+}
+
+#aba2 textarea{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60%;
+    height: 100%;
+}

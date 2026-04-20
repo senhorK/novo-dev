@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>HTML</title>
+  
+  <!-- HTML -->
+  
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+</head>
+
+<body>
+  <header>
+  <!--div class="logo">💻 Novo Dev</div-->
+  <div class="logo">
+    <span class="icon">&lt;/&gt;</span>
+    <span class="text">Novo Dev</span>
+</div>
+  
+  <nav>
+    <a href="./Ed Max/versao.html">Início</a>
+    <a href="#">Projetos</a>
+    <a href="#">Tutoriais</a>
+  </nav>
+</header>
+  
+<section class="hero">
+  <h2>Bem-vindo ao <br />
+  <span>Novo Dev</span>
+  </h2>
+  <p>
+    Projetos, códigos, jogos e ideias para desenvolvedores
+    que querem criar algo incrível.
+  </p>
+  <button id="ExplorarP">Explorar Projetos</button> 
+</section>
+
+
+<section class="layCard" id="layCard">
+    <h2>Projetos em Destaque</h2>
+
+    <div class="cards">
+        <div class="card">
+            <h3>Tiles Mapas</h3>
+              <a href="./Ed Max/versao.html">Ed Map</a>
+              <i class="inPro ativo">Desenvolvendo <b></b></i>
+        </div>
+        <div class="card">
+            <h3>Paleta de Cores</h3>
+              <a href="./Cores/versao.html">Cores</a>
+              <p>Exemplo Basico de Paletas de Cores, pra quen tem mas criatividade.</p>
+              <i class="inPro ativo">Desenvolvendo <b></b></i>
+        </div>
+
+        <div class="card">
+            <h3>Geometry</h3>
+              <a href="./Geometry/versao.html">Geometry</a>
+              <p>Exemplo Basico de jogo no estilo <strong>Geometry</strong></p>
+              <i class="inPro ">Desenvolvendo <b></b></i>
+        </div>
+
+
+        <div class="card">
+            <h3>Editor de Código</h3>
+            <p>Editor online com suporte a HTML, CSS e JavaScript.</p>
+            <i class="inPro">Desenvolvendo</i>
+        </div>
+
+        <div class="card">
+            <h3>Jogo da Cobrinha</h3>
+            <p>Versão avançada com IA e joystick mobile.</p>
+            <i class="inPro">Desenvolvendo</i>
+        </div>
+        <div  class="card">
+            <h3>Heli x Heli</h3>
+            <p>Versão avançada com IA e joystick mobile.</p>
+            <i class="inPro">Desenvolvendo</i>
+        </div>
+
+        <div class="card">
+            <h3>Player de Música</h3>
+            <p>Player moderno integrado com Node.js.</p>
+            <i class="inPro">Desenvolvendo</i>
+        </div>
+        <div class="card">
+            <h3>Mini Servidor</h3>
+            <p>Pra linhas de comndo com Node.js</p>
+            <i class="inPro">Desenvolvendo</i>
+        </div>
+
+        
+    </div>
+</section>
+
+
+
+<div class="layPro">
+    
+</div>
+
+
+
+  <footer>
+        <p>© 2026 Game Loogs - Todos os direitos reservados</p>
+        
+        <div class="footer-links">
+          <a href="#">📞 Contato</a>
+          <a href="#">📧 E-mail</a>
+        </div>
+        <p>erickuchirradh@gmail.com</p>
+  </footer>
+
+
+  <script src="main.js"></script>
+  
+  <script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js')
+        .then(reg => console.log('Service Worker registrado!', reg))
+        .catch(err => console.error('Erro ao registrar SW:', err));
+    }
+  </script>
+</body>
+</html>

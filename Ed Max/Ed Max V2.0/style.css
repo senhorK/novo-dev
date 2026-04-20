@@ -1,0 +1,632 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #000000;
+    overflow: hidden;
+    font-family: Arial;
+}
+
+
+
+.Criar{
+    display:none;
+}
+
+.Criar.ativo{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100vh;
+
+    background:rgba(0,0,0,0.7); /* overlay melhor */
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    z-index: 100;
+}
+
+/* Caixa principal */
+.Criar ul{
+    list-style:none;
+    background:#161b22;
+    padding:20px;
+    border-radius:15px;
+
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+
+    width:90%;
+    max-width:350px;
+
+    box-shadow:0 10px 40px rgba(0,0,0,.5);
+}
+
+/* Inputs */
+.Criar li{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.Criar input{
+    width:90px;
+    padding:10px;
+    border:none;
+    border-radius:8px;
+    background:#21262d;
+    color:white;
+    outline:none;
+}
+
+/* foco no input */
+.Criar input:focus{
+    box-shadow:0 0 0 2px #58a6ff;
+}
+
+/* Texto */
+.Criar p{
+    color:#c9d1d9;
+    font-size:14px;
+}
+
+/* Box de imagem */
+.Criar .boxImg{
+    width: 100%;
+    height: 300px;
+    overflow-y:auto;
+    background:#0d1117;
+    border-radius:10px;
+    
+    
+}
+
+/* Imagens */
+.Criar .boxImg img{
+    width: 30%;
+    margin: 5px;
+    border-radius: 8px;
+    border: 1px solid #30363d;
+    cursor: pointer;
+    transition:.2s;
+}
+
+.Criar .boxImg img:hover{
+    border-color:#58a6ff;
+    transform:scale(1.02);
+}
+
+/* Botão */
+.Criar button{
+    margin-top:10px;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    background:linear-gradient(135deg,#58a6ff,#7c3aed);
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.Criar button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 5px 20px rgba(88,166,255,.4);
+}
+
+
+/* Área principal */
+.lay1 {
+    position: absolute;
+    
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    
+    background: #0d1117;
+}
+
+/* Canvas principal */
+.lay1 canvas {
+    background: transparent;
+    touch-action: none;    
+    image-rendering: pixelated;
+}
+
+/* Paleta lateral */
+/*.lay2 {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 25%;
+    height: calc(100vh - 80px);
+    background: #161b22;
+    border-left: 2px solid #222;
+}*/
+.lay2 {
+    position: absolute;
+    top: 51%;
+    
+    left: 0;
+    width: 70%;
+    height:  35%;
+    background: #161b22;
+    border-left: 2px solid #222;
+    touch-action: none;
+}
+/* Canvas da paleta */
+.lay2 canvas {
+    background: #C9E9FF70;
+    image-rendering: pixelated;
+}
+
+.p1{
+    position: absolute;
+    right: 10px;
+    top: 51%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    text-decoration: none;
+    list-style: none;
+    color: #FFFFFF;
+}
+.p1 b{
+    flex: 1;
+    color: #52FFB7;
+}
+
+
+.Download{
+    position: absolute;
+    right: 10px;
+    top: 55%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    text-decoration: none;
+    list-style: none;
+    color: #FFFFFF;
+}
+
+
+
+
+/* Menu inferior */
+.menu1 {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 90px;
+    padding: 1px;
+}
+
+/* Grid do menu */
+.menu1 ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    height: 100%;
+    gap: 10px;
+}
+
+/* Botões */
+
+
+
+.menu1 li,select {
+    width: 30px;
+    height: 30px;
+    list-style: none;
+    font-weight: bolder;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    border-radius: 10px;
+    color: #c9d1d9;
+    cursor: pointer;
+    transition: .5s;
+}
+
+#pintar{
+    background: url(./icon/pintar.svg) no-repeat center;  
+    background-size: contain;
+}
+#apagar{
+    background: url(./icon/apagar.svg) no-repeat center;
+    background-size: contain;
+}
+#grid{
+   background: url(./icon/gride.svg) no-repeat center;
+   background-size: contain;
+}
+#seletColisao{
+   background: url(./icon/parede.svg) no-repeat center;
+   background-size: contain;
+}
+#mover {
+    background: url(./icon/mover.svg) no-repeat center;
+    background-size: contain;
+}
+#novo {
+    background: url(./icon/novo.svg) no-repeat center;
+    background-size: contain;
+}
+#balde {
+    background: url(./icon/balde.svg) no-repeat center;
+    background-size: contain;
+}
+#loadMap {
+    background: url(./icon/loadMap.svg) no-repeat center;
+    background-size: contain;
+}
+#salvar {
+    background: url(./icon/salvar.svg) no-repeat center;
+    background-size: contain;
+}
+#apagarAll {
+    background: url(./icon/apagarAll.svg) no-repeat center;
+    background-size: contain;
+}
+
+
+
+
+
+.menu1 select{
+    color: #2E2E2E00;
+}
+
+
+
+.menu1 li:hover{
+    box-shadow: 0 1px 1px #FFFFFF;
+    font-size: 20px;
+    
+}
+
+/* Hover */
+.menu1 li:hover {
+    background: #535353;
+    color: white;
+}
+
+.menu1 li.ativo{
+    box-shadow: 0 2px 2px #00FF34;
+    color: white;
+}
+
+
+.boot{
+    display: none;
+}
+.boot.ativo{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #FFFFFF;
+    background: #303030;
+}
+#bootP{
+    font-size:22px;
+    letter-spacing:2px;
+    color:#c9d1d9;
+    animation:pulse 1.5s infinite;
+}
+.boot span{
+    width: 0px;
+    height: 2px;
+    border-radius: 10px;
+    height:6px;
+    background: #72B3FF;
+}
+
+
+
+@keyframes pulse{
+    0%{opacity:0.4}
+    50%{opacity:1}
+    100%{opacity:0.4}
+}
+
+
+
+
+
+
+.loadMapas{display: none;}
+.loadMapas.ativo{
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+    align-items: center;
+    background: #0C0C0C;
+}
+.loadMapas ul{
+    width: 100%;
+    height: 80%;
+    display:grid;
+    justify-items: center;
+    text-align: center;
+    grid-template-columns:repeat(auto-fit, minmax(140px, 1fr));
+    
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.loadMapas li{
+    width: 90%;
+    height: 200px;
+    border-radius:12px;
+    padding: 20px;
+    margin: 10px;
+    display:flex;
+    flex-direction:column;
+    box-shadow: 0 1px 1px #FFFFFF;
+    cursor:pointer;
+    transition:.3s;
+    color: #FFFFFF;
+    background: #363636;
+}
+.loadMapas img{
+    width: 100%;
+    height: 100px;
+    object-fit:cover;
+
+    border-radius:8px;
+    background:#eee;
+}
+.loadMapas button{
+    color: #FFFFFF;
+    width: 90%;
+    padding: 5px;
+    margin: 10px;
+    border-radius: 2px;
+    background: transparent;
+}
+.loadMapas p,b{
+    margin: 10px;
+    font-size:14px;
+    font-weight:bold;
+    color: #FFFFFF;
+    text-align:center;
+}
+.loadMapas b{
+    margin: 10px;
+    font-size: 20px;
+    font-weight:bold;
+    color: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0 1px 1px #FFFFFF;
+    text-align:center;
+    transition: 0.5s;
+}
+.loadMapas b:hover{
+    font-size: 22px;
+}
+
+
+
+.layText{
+    display: none;
+}
+.layText.ativo{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    
+    background: rgba(0, 0, 0, 0.8);
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    z-index: 2000;
+}
+
+.layText textarea{
+    display: none;
+}
+
+
+
+.layText pre {
+  width: 100%;
+  height: 90%;
+  background: #0d1117;
+  color: #c9d1d9;
+  padding: 15px;
+  border-radius: 1px;
+  overflow: auto;
+  font-family: monospace;
+  font-size: 13px;
+}
+
+
+
+
+
+.btns {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.btns button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+
+
+
+/* cores */
+.key {
+  color: #ff7b72;
+}
+
+.string {
+  color: #a5d6ff;
+}
+
+.number {
+  color: #ffa657;
+}
+
+.bool {
+  color: #79c0ff;
+}
+
+
+
+
+.opsMap{
+    display: none;
+}
+.opsMap.ativo{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #FFFFFF;
+    background: #0000008F;
+    z-index: 200;
+}
+.opsMap li{
+    list-style: none;
+    font-size: 15px;
+    font-weight: bolder;
+    padding: 10px;
+    border-radius: 5px;
+    transition: 0.5s;
+}
+.opsMap li:hover{
+    box-shadow: 0 1px 1px #FFFFFF;
+    font-size: 20px;
+    
+}
+
+
+
+
+
+.propt{
+    display: none;
+}
+.propt.ativo {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    
+    /*background: linear-gradient(135deg, #3A3F6E, #5A5F8E);
+    backdrop-filter: blur(10px);*/
+    background: #202020;
+    z-index: 9999;
+}
+.propt p{
+    font-size: 20px;
+    font-weight: bolder;
+    color: #FFFFFF;
+}
+
+/* Caixa central */
+.propt input {
+    width: 220px;
+    padding: 12px 14px;
+    
+    border: none;
+    border-radius: 10px;
+    
+    outline: none;
+    
+    background: #ffffff10;
+    color: #fff;
+    
+    font-size: 14px;
+    
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    
+    transition: 0.2s;
+}
+
+.propt input::placeholder {
+    color: #ffffff80;
+}
+
+/* Efeito ao focar */
+.propt input:focus {
+    background: #ffffff20;
+    box-shadow: 0 0 0 2px #6C8CFF;
+}
+
+/* Botão */
+.propt button {
+    padding: 10px 18px;
+    
+    border: none;
+    border-radius: 10px;
+    
+    background: #6C8CFF;
+    color: white;
+    
+    font-size: 14px;
+    font-weight: bold;
+    
+    cursor: pointer;
+    
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    
+    transition: 0.2s;
+}
+
+/* Hover */
+.propt button:hover {
+    background: #5674e0;
+    transform: translateY(-2px);
+}
+
+/* Click */
+.propt button:active {
+    transform: scale(0.95);
+}

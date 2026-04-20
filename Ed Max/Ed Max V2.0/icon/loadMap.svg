@@ -1,0 +1,22 @@
+<!-- Ícone LOAD MAP (abrir mapa / carregar arquivo) -->
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 24 24"
+     width="24"
+     height="24">
+
+  <!-- Pasta -->
+  <path
+    fill="#ffffff"
+    d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v2H3V6z"/>
+
+  <!-- Corpo da pasta -->
+  <path
+    fill="#FFD54F"
+    d="M3 10h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-8z"/>
+
+  <!-- Seta entrando -->
+  <path
+    fill="#4FC3F7"
+    d="M12 11l4 4h-3v4h-2v-4H8l4-4z"/>
+
+</svg>
