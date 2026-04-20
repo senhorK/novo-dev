@@ -2,144 +2,10 @@
 
 
 
-/*function somPulo() {
-  const audio = new (window.AudioContext || window.webkitAudioContext)();
 
-  const osc = audio.createOscillator();
-  const gain = audio.createGain();
 
-  osc.type = "square"; // square, sine, triangle, sawtooth
-  osc.frequency.setValueAtTime(600, audio.currentTime);
 
-  gain.gain.setValueAtTime(0.1, audio.currentTime);
-  gain.gain.exponentialRampToValueAtTime(
-    0.001,
-    audio.currentTime + 0.15
-  );
 
-  osc.connect(gain);
-  gain.connect(audio.destination);
-
-  osc.start();
-  osc.stop(audio.currentTime + 0.15);
-}*/
-
-const audio = new(window.AudioContext || window.webkitAudioContext)();
-
-function somPulo() {
-  const osc = audio.createOscillator();
-  const gain = audio.createGain();
-  
-  osc.type = "square";
-  osc.frequency.setValueAtTime(600, audio.currentTime);
-  
-  gain.gain.setValueAtTime(0.1, audio.currentTime);
-  gain.gain.exponentialRampToValueAtTime(
-    0.001,
-    audio.currentTime + 0.09
-  );
-  
-  osc.connect(gain);
-  gain.connect(audio.destination);
-  
-  osc.start();
-  osc.stop(audio.currentTime + 0.9);
-}
-function somPuloOriginal() {
-  const osc = audio.createOscillator();
-  const gain = audio.createGain();
-  
-  // Usar "triangle" deixa o som menos "ardido" que o square, mais nostálgico
-  osc.type = "triangle"; 
-  
-  const agora = audio.currentTime;
-  
-  // Começa em 150Hz e sobe para 600Hz em 0.1 segundos
-  osc.frequency.setValueAtTime(150, agora);
-  osc.frequency.exponentialRampToValueAtTime(600, agora + 0.1);
-  
-  gain.gain.setValueAtTime(0.2, agora);
-  gain.gain.exponentialRampToValueAtTime(0.001, agora + 0.2);
-  
-  osc.connect(gain);
-  gain.connect(audio.destination);
-  
-  osc.start(agora);
-  osc.stop(agora + 0.2);
-}
-function somPuloEstiloso() {
-  const osc = audio.createOscillator();
-  const gain = audio.createGain();
-  
-  osc.type = "sawtooth";
-  const agora = audio.currentTime;
-
-  // Curva de frequência: sobe e depois desce um pouco
-  osc.frequency.setValueAtTime(200, agora);
-  osc.frequency.linearRampToValueAtTime(800, agora + 0.05);
-  osc.frequency.linearRampToValueAtTime(400, agora + 0.15);
-  
-  gain.gain.setValueAtTime(0.1, agora);
-  gain.gain.exponentialRampToValueAtTime(0.01, agora + 0.15);
-  
-  osc.connect(gain);
-  gain.connect(audio.destination);
-  
-  osc.start(agora);
-  osc.stop(agora + 0.15);
-}
-function somPuloUooop() {
-  const osc = audio.createOscillator();
-  const gain = audio.createGain();
-  
-  // "sine" dá aquele tom limpo de desenho animado/flauta
-  osc.type = "sine"; 
-  
-  const agora = audio.currentTime;
-  const duracao = 0.5; // Um pouco mais longo para dar tempo de ouvir o "uooop"
-
-  // O efeito "uooop": começa em 200Hz e desliza até 800Hz
-  // Usamos linearRamp para dar uma sensação de subida constante
-  osc.frequency.setValueAtTime(400, agora);
-  osc.frequency.linearRampToValueAtTime(800, agora + duracao);
-  
-  // Envelope de Volume
-  gain.gain.setValueAtTime(0, agora);
-  // Sobe o volume rápido no início (o "u")
-  gain.gain.linearRampToValueAtTime(0.9, agora + 0.05); 
-  // Mantém e desce suave no final (o "p" mudo)
-  gain.gain.exponentialRampToValueAtTime(0.01, agora + duracao);
-  
-  osc.connect(gain);
-  gain.connect(audio.destination);
-  
-  osc.start(agora);
-  osc.stop(agora + duracao);
-}
-function somPuloUooopAgudo() {
-  const osc = audio.createOscillator();
-  const gain = audio.createGain();
-  
-  osc.type = "sine"; 
-  
-  const agora = audio.currentTime;
-  // Diminuir a duração faz o "uooop" ser mais rápido e energético
-  const duracao = 0.25; 
-
-  // Começamos em 600Hz (bem mais agudo) e saltamos para 1200Hz
-  osc.frequency.setValueAtTime(600, agora);
-  osc.frequency.exponentialRampToValueAtTime(1200, agora + duracao);
-  
-  gain.gain.setValueAtTime(0, agora);
-  gain.gain.linearRampToValueAtTime(0.15, agora + 0.03); 
-  gain.gain.exponentialRampToValueAtTime(0.001, agora + duracao);
-  
-  osc.connect(gain);
-  gain.connect(audio.destination);
-  
-  osc.start(agora);
-  osc.stop(agora + duracao);
-}
 
 
 
@@ -150,9 +16,6 @@ function somPuloUooopAgudo() {
 const control ={
       jump: false
 }
-
-
-
 var scale = 1;
 var lar = window.innerWidth;
 var alt = window.innerWidth;
@@ -186,7 +49,9 @@ class Game {
     //obstaculos = FaseTeste();
     //obstaculos = tribunalDoCaos()
     //obstaculos = sofrimento_Sangrento()
-    obstaculos = espinhos_Sangrentos()
+    //obstaculos = espinhos_Sangrentos()
+    //obstaculos = gargataColosal()
+    obstaculos = sofrimentoSupremo();
     const typ = ["platform", "coluna", "block"]
     obstaculos.forEach(obs => {
       if (typ.includes(obs.type)) {
@@ -201,6 +66,7 @@ class Game {
   
   colidPlayerEspinho(){
     ////colisão com player e espinhos
+    const colidLs = ["spike","spikeTop"]
     const objPlayer = {
       x: player.x,
       y: player.y,
@@ -208,7 +74,14 @@ class Game {
       h: player.size
     }
     
-    const colidSpike = obstaculos.find(obs => obs.type === "spike" && Colid(objPlayer, obs));
+    //const colidSpike = obstaculos.find(obs => obs.type === "spike" && Colid(objPlayer, obs));
+    const colidSpike = obstaculos.find(obs => {
+      if(!colidLs.includes(obs.type)) return;
+      
+      return Colid(objPlayer, obs);
+    })
+    
+    
     
     if (colidSpike) { this.newGame() }
   }
@@ -235,6 +108,36 @@ class Game {
       this.newGame();
     }
   }
+  
+  colidMoedas(){
+    const nextBox = {
+      x: player.x + player.size,
+      y: player.y,
+      w: player.size,
+      h: player.size
+    };
+    
+    
+    const index = obstaculos.findIndex(obs =>obs.type === "moeda" && Colid(obs, nextBox));
+    
+    if (index !== -1) {
+      
+      obstaculos.splice(index, 1);
+      //somMoeda();
+      somMoeda1()
+    }
+    
+    /*
+    const colidM = obstaculos.find(obs =>{
+      if(obs.type !== "moeda") return;
+        
+      if(Colid(obs, nextBox)){
+        obs.y = 0;
+      }
+    })
+    */
+  }
+  
   update(){
     
     mundo.update();
@@ -246,6 +149,8 @@ class Game {
     
     this.colidPlayerEspinho();
     this.colidLateral();
+    this.colidMoedas()
+    
   }
   draw(){
      ctx.clearRect(0,0, ctx.canvas.width, ctx.canvas.height)
@@ -313,12 +218,14 @@ class Game {
     this.newGame()
     this.loop()
     
-
+    //startTrilha()
      
 
     document.body.addEventListener("pointerdown", (e)=>{
       e.preventDefault()
       control.jump = true;
+      
+      
       //somPuloUooop()
       if (audio.state === "suspended") {
         audio.resume();

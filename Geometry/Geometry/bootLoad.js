@@ -8,7 +8,7 @@
 
 
       
-const lsScript    = ["./js/Objs.js","./main.js"];
+const lsScript    = ["./js/soms.js","./js/Objs.js","./js/Fases.js","./main.js"];
 const lsImg       = ["./img/bg1.jpg","./mapa.png"];
 
 const IMG         =[];
