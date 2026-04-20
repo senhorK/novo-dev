@@ -51,11 +51,11 @@ echo "╚═══════════════════════�
 
 
 
-git config --global --add safe.directory /storage/emulated/0/Download/Geometry
+git config --global --add safe.directory /storage/emulated/0/Documents/dev/public
 
 git init
 
-git remote add origin https://github.com/senhorK/app.git
+git remote add origin https://github.com/senhorK/novo-dev.git
 
 git add .
 
