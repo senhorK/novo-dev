@@ -1,0 +1,17 @@
+<!-- Ícone COLISÃO com 2 cores -->
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 24 24"
+     width="24"
+     height="24">
+
+  <!-- Bloco / parede -->
+  <path
+    fill="#ffffff"
+    d="M3 5h18v4H3V5zm0 5h18v4H3v-4zm0 5h18v4H3v-4z"/>
+
+  <!-- Destaque de colisão -->
+  <path
+    fill="#EF5350"
+    d="M8 7h8v1H8V7zm0 5h8v1H8v-1zm0 5h8v1H8v-1z"/>
+
+</svg>

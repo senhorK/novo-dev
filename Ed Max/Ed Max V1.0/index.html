@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>HTML</title>
+  
+  <!-- HTML -->
+  
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  
+  <div class="lay1" id="lay1"><canvas id="canvas1"></canvas></div>
+  <div class="lay2" id="lay2"><canvas id="canvas2"></canvas></div>
+  
+  
+
+  
+  
+    <p id="p1">...</p>
+    <p id="p2">...</p>
+    <div id="laychek">
+    	<button id="addColid" >Add  ✅</button><br />
+    	<button id="rmvColid" class="ativo">Rmv  </button>
+    </div>
+    
+    <ul class="lsBtn">
+    <button id="Pintar">🖊️</button>
+    <button id="Apagar">◻️</button>
+    <button id="btnNcolid">💥</button>
+    
+    <button id="btnMove" class="ativo">🖲️</button>
+    <button id="Grid"    >🔶</button>
+    <button id="btnOpenSalvar">🛟</button>
+  </ul>
+  
+  
+
+
+
+
+
+<div class="MENU" id="MENU">
+	
+	<ul class="btnLi">
+		 <li>Criar</li>
+		 <li>Mapas</li>
+		 <li>Data</li>
+	</ul>
+	
+	
+	<div class="aba ativo" id="aba1">
+			<ul class="ul1">
+		      <li>Criar</li>
+		      <br /><br />
+		      <li>Size</li>
+		      <input type="number" name="" id="Size_" value="16">
+		      
+		      
+		      <li>Linhas</li>
+		      <input type="number" name="" id="Li_" value="30">
+		      
+		      <li>Colunas</li>
+		      <input type="number" name="" id="Co_" value="30">
+		      <br /><br /><br />
+		      <button id="btnNovo">Ok</button>
+		    </ul> 
+		    
+		    <ul class="ul2" id="imgs">
+		      
+		    </ul>
+			
+			
+	</div>
+	
+	
+	
+	
+	
+	<div class="aba" id="aba2">
+		
+		<ul id="LayloadMapas">
+			<p id="items" class="items"></p>
+		</ul>
+		
+		
+		<textarea name="" id="dataAria" cols="30" rows="10"></textarea>
+		
+	</div>
+	
+	
+	
+	<div class="aba">Aba3</div>
+	
+</div>
+  
+  <button class="Opem" id="Opem">|||</button>
+
+
+
+<div class="laySalvar" id="laySalvar">
+	
+	<input type="text" name="" id="NomeM" placeholder="Nome do Map...>">
+	<br /><br />
+	<button id="btnSalvar">Ok</button>
+</div>
+
+
+
+<script>
+ const Abas = document.querySelectorAll('.aba');
+  const Li = document.querySelectorAll('.btnLi li');
+  
+  Li.forEach((e, index) => {
+    e.addEventListener("click", () => {
+      // Remove "ativo" de todos os li e abas
+      Li.forEach(el => el.classList.remove("ativo"));
+      Abas.forEach(aba => aba.classList.remove("ativo"));
+      
+      // Ativa o li e a aba correspondente
+      e.classList.add("ativo");
+      Abas[index].classList.add("ativo");
+    });
+  });
+
+
+
+
+
+
+
+
+
+
+  LoadImage = function(src) {
+	var img = document.createElement("img");
+	img.src = src;
+	return img;
+}
+
+
+
+var listImg = [
+  LoadImage("/imgg/tile_1.png"),
+	LoadImage("img/TilesCityDay.png"),
+	LoadImage("img/TilesCityNight.png"),
+	LoadImage("img/yyy.jpeg"),
+	LoadImage("img/6.png"),
+	LoadImage("img/Game Boy.png"),
+	LoadImage("img//imjhhhh.jpg"),
+	LoadImage("img/destroy_block.png"),
+	LoadImage("img/Tileset_1.png"),
+	LoadImage("img/Tileset_2.png"),
+	LoadImage("img/Tileset_3.png"),
+	LoadImage("img/Tileset_4.png"),
+	LoadImage("img/Tileset_5.png"),
+	LoadImage("img/Tileset_6.png"),
+	LoadImage("img/Tileset_7.png"),
+	LoadImage("img/TilesArray.png"),
+	LoadImage("img/TilesCyclone.png"),
+	LoadImage("img/TilesFinal.png"),
+	LoadImage("img/TilesEarthquake.png"),
+	LoadImage("img/TilesFlood.png"),
+	LoadImage("img/TilesHail.png"),
+	LoadImage("img/TilesLab.png"),
+	LoadImage("img/TilesLightning.png"),
+	LoadImage("img/TilesRockslide.png"),
+	LoadImage("img/TilesVolcano.png"),
+	LoadImage("img/BlockBurstable.png"),
+	LoadImage("img/images.png")
+]
+
+
+
+var imgIdx = 0;
+var imgAtual = listImg[imgIdx]
+
+function ListImg() {
+	listImg.forEach((e,idex) => {
+		var li = document.createElement("li")
+		li.style.backgroundImage = `url(${e.src})`
+		
+		li.addEventListener("click", ()=>{
+			imgAtual = listImg[idex]
+			imgIdx   = idex;
+			paleta.setLoad()
+			
+		})
+		imgs.appendChild(li)
+	})
+}
+
+  
+  
+  
+</script>
+    
+  
+  
+  
+  
+  
+  <script src="main.js"></script>
+</body>
+</html>

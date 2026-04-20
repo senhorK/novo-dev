@@ -1,0 +1,22 @@
+<!-- Ícone APAGAR TUDO (limpar mapa inteiro) -->
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 24 24"
+     width="24"
+     height="24">
+
+  <!-- Lixeira -->
+  <path
+    fill="#ffffff"
+    d="M9 3h6l1 2h4v2H4V5h4l1-2zm1 6h2v8h-2V9zm4 0h2v8h-2V9z"/>
+
+  <!-- Corpo -->
+  <path
+    fill="#EF5350"
+    d="M6 7h12l-1 13a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L6 7z"/>
+
+  <!-- X de perigo -->
+  <path
+    fill="#ffffff"
+    d="M10.5 11l1.5 1.5L13.5 11 15 12.5 13.5 14 15 15.5 13.5 17 12 15.5 10.5 17 9 15.5 10.5 14 9 12.5 10.5 11z"/>
+
+</svg>
