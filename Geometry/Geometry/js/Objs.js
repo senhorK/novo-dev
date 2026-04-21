@@ -27,7 +27,6 @@ getColid = function(my, others = []) {
 
 
 
-
 class Mundo {
   constructor() {
     this.img = IMG[0];
@@ -76,10 +75,10 @@ class Mundo {
       const chao = this.sprites.chao;
       
       chao.x -= chao.v;
-      chao.x2 -= chao.v;
-      chao.x3 -= chao.v;
+     // chao.x2 -= chao.v;
+      //chao.x3 -= chao.v;
       
-      if (chao.x + chao.w <= 0) {
+      /*if (chao.x + chao.w <= 0) {
         chao.x = chao.x3 + chao.w;
       }
       
@@ -90,19 +89,27 @@ class Mundo {
       if (chao.x3 + chao.w <= 0) {
         chao.x3 = chao.x2 + chao.w;
       }
-      
+      */
       
 }
   draw(){
-
-   const gradient = ctx.createLinearGradient(0, 0, 0, ctx.canvas.height);
+    desenharBackgroundGeometryDinamico(ctx.canvas.width, ctx.canvas.height)
+   
+  /* const gradient = ctx.createLinearGradient(0, 0, 0, ctx.canvas.height);
          gradient.addColorStop(0, "#1a0f3d");
          gradient.addColorStop(1, "#3b1d70");
     
          ctx.fillStyle = gradient;
          ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    */
 
 
+
+    let chao = this.sprites.chao;
+
+    drawChao(chao.x,chao.y, chao.w, chao.h)
+
+    /*
     //desenha chao
     let chao = this.sprites.chao;
    
@@ -122,7 +129,7 @@ class Mundo {
       chao.sx, chao.sy, chao.sw, chao.sh,
       chao.x3, chao.y, chao.w, chao.h
     );
-    
+    */
     
     
   }
@@ -258,21 +265,28 @@ class Obstacle {
 class Player {
   constructor() {
     this.x = 100;
-    this.y = 50;
+    this.y = 100;
     this.size = 32;
     this.line = 1;
    
-    this.jump = false;
+    this.jump = true;
     this.inAr = true;
-    this.jjump = true;
+    
+    this.maxJump = 2;
+    this.jjump = this.maxJump;
+    
     this.vboot = 0;
    
     
     
     this.gravity = 0.6;
     this.vy = 0;
+    
+    
     this.vx = 1;
     this.jumpForce = -12;
+    
+    
     this.onGround = false;
     
     this.colidBase = null;
@@ -281,64 +295,13 @@ class Player {
     
     this.rotation = 0;
     this.rotationSpeed = 0.2;
-  }
-  
-  
-  colidB(){
-          // prever próxima posição
-      let nextY = this.y + this.vy;
-      
-      const nextBox = {
-        x: this.x, 
-        y: nextY,
-        w: this.size,
-        h: this.size 
-        
-      };
-      this.colidBase = getColid(nextBox, mundo.colid);
-      
-      
-      //si o player tiver no chao
-      if (this.colidBase && this.vy >= 0) {
-        
-        this.coyoteTime = this.coyoteLimit;
-        this.y = this.colidBase.y - this.size;
-        this.vy = 0;
-        this.onGround = true;
-        
-      }
-     
-      else {
-        // no ar
-        this.coyoteTime--;
-        this.y = nextY;
-        this.onGround = false;
-      }
-      
-      // pulo
-      // pulo
-      if (control.jump && this.coyoteTime > 0) {
-          this.vy = this.jumpForce;
-          this.onGround = false;
-          
-          // 1. Toca o som apenas UMA vez
-          somPuloUooop();
-          
-          // 2. MATA o coyoteTime imediatamente
-          // Isso impede que o loop entre aqui de novo até o player tocar o chão
-          this.coyoteTime = 0; 
-      }
-
-      /*if (control.jump && this.coyoteTime > 0){
-          this.vy = this.jumpForce;
-          this.onGround = false;
-          somPuloUooop()
-         
-      }*/
-  }
-  colidT(){
     
+    this.db = document.querySelector("#p1");
   }
+  
+  
+  
+  
   rotacional(){
     // si o player nao tiver no chao Gira
     if(!this.onGround) {
@@ -350,100 +313,89 @@ class Player {
     else this.rotation = 0;
 
   }
+  colisaoBase(){
+          //Prever Próximo posicionamento eixo Y>>>
+          let preY = {
+            x: this.x,
+            y: this.y + this.vy,
+            w: this.size,
+            h: this.size
+          }
+          
+          const colidB = getColid(preY, mundo.colid);
+          
+          //colisão na base do player     
+          if(colidB && this.vy >= 0){
+            this.vy = 0;
+            this.y = colidB.y - this.size;
+            //this.jump = true;
+            this.inAr = false;
+          }
+          else{
+            this.y = preY.y;
+            //this.jump = false;
+            
+            this.inAr = true;
+          }
+
+  }
+  colisaoTop(){
+          //colisão no top do player
+          if (this.inAr) {
+            const preB = {
+              x: this.x,
+              y: this.y + this.vy,
+              w: this.size,
+              h: 5
+            }
+            
+            const colidB = getColid(preB, mundo.colid);
+            if (colidB) this.vy = 0;
+            
+          }
+  }
+  jummp(){
+      if (!this.inAr) this.jjump = this.maxJump;
+
+      if (control.jump && !this.jump) {
+        if (this.jjump > 0) {
+          this.jjump--;
+          this.vy = -12;
+          somPuloUooop();
+        }
+        
+        this.jump = true;
+      }
+
+      else if (!control.jump) this.jump = false;
+  }
   update() {
       // aplicar gravidade
-     // this.vy += this.gravity;
-      if (this.vy < 0) {
-        this.vy += this.gravity; // subindo
-      } else {
-        this.vy += this.gravity * 1.5; // caindo
-      }
-            
+
+      if (this.vy < 0) this.vy += this.gravity;
+      else             this.vy += this.gravity * 1.5; // caindo
       
       
       
-      this.colidB();
+      
+      this.colisaoBase();   
+      this.colisaoTop();
       this.rotacional()
-      
-      
-      
-      
-      
-      if (!this.onGround && this.vy < 0){
-        const headBox = {
-            x: this.x + 4,
-            y: this.y + this.vy,
-            w: this.size - 8,
-            h: 5
-          };
-          
-          
-          const colidTop = getColid(headBox, mundo.colid);
-          if (colidTop && this.vy < 0) {
-             this.vy = 0;
-          }
-      }
-      
-      
-      
-      
-      
-   
+      this.jummp();
+}
+  
+  
+  
+
+
+   draw(){
+     drado(this.x,this.y,this.size,this.rotation)
+
+     //CristalTri(this.x,this.y,this.size,this.rotation)
+     //SharinganClassico(this.x,this.y,this.size,this.rotation)
+     //Sharingan(this.x,this.y,this.size,this.rotation)
      
-}
-  
-  
-  
-
-  draw() {
-  ctx.save();
-  
-  // centro do player
-  const centerX = this.x + this.size / 2;
-  const centerY = this.y + this.size / 2;
-  
-  // mover origem pro centro
-  ctx.translate(centerX, centerY);
-  
-  // girar
-  ctx.rotate(this.rotation);
-  
-  // desenhar relativo ao centro
-  const x = -this.size / 2;
-  const y = -this.size / 2;
-  
-  // corpo
-  ctx.fillStyle = "#0f0";
-  ctx.fillRect(x, y, this.size, this.size);
-  
-  ctx.strokeStyle = "#fff";
-  ctx.lineWidth = this.line;
-  ctx.strokeRect(x, y, this.size, this.size);
-  
-  // olhos
-  ctx.fillStyle = "#0f0";
-  ctx.fillRect(x + this.size * 0.1, y + this.size * 0.2, this.size / 5, this.size / 5);
-  ctx.fillRect(x + this.size * 0.7, y + this.size * 0.2, this.size / 5, this.size / 5);
-  
-  ctx.strokeRect(x + this.size * 0.1, y + this.size * 0.2, this.size / 5, this.size / 5);
-  ctx.strokeRect(x + this.size * 0.7, y + this.size * 0.2, this.size / 5, this.size / 5);
-  
-  // boca
-  ctx.fillRect(x + this.size * 0.25, y + this.size * 0.7, this.size / 2, this.size / 6);
-  ctx.strokeRect(x + this.size * 0.25, y + this.size * 0.7, this.size / 2, this.size / 6);
-  
-  
-  
-  
-  ctx.restore();
-  
-  
-  ctx.fillStyle = "#f00";
-  ctx.fillRect(this.x, this.y, this.size, this.size);
-
-  
-}
-  
+   }
 }
 
 

@@ -1,499 +1,138 @@
+// Armazena as formas do fundo para não re-gerar a cada frame (melhor performance)
+let backgroundShapes = []; 
 
+function gerarFormasFundo(width, height) {
+  backgroundShapes = [];
+  const numShapes = 15; // Quantidade de formas grandes
 
+  for (let i = 0; i < numShapes; i++) {
+    // Define se é quadrado (0) ou retângulo (1)
+    const type = Math.random() < 0.7 ? "square" : "rect";
+    
+    // Tamanhos grandes e variados
+    const baseSize = 80 + Math.random() * 150; 
+    const w = type === "square" ? baseSize : baseSize * (1.5 + Math.random());
+    const h = baseSize;
 
+    // Posição inicial aleatória (fora da tela à direita para entrarem depois)
+    const x = Math.random() * width * 2; 
+    const y = Math.random() * (height * 0.8); // Mantém na parte superior/média
 
-Colid = function(my, other) {
-  return my.x + my.w > other.x &&
-    my.x <= other.x + other.w &&
-    my.y + my.h > other.y &&
-    my.y <= other.y + other.h;
-}
-getColid = function(my, others = []) {
-  var touchingModel = null;
-  others.forEach(otherModel => {
+    // Camada (determina velocidade, tamanho e transparência)
+    // 0: Mais distante (lento, pequeno, transparente)
+    // 1: Média (médio, médio, médio)
+    // 2: Mais próxima (rápido, grande, menos transparente)
+    const layer = Math.floor(Math.random() * 3);
+    
+    // Velocidades diferentes baseadas na camada (Parallax)
+    const speeds = [0.2, 0.5, 1.0]; 
+    const speed = speeds[layer];
 
-    if (touchingModel) {
-      return;
-    }
+    // Transparências diferentes baseadas na camada
+    const alphas = [0.03, 0.06, 0.1];
+    const alpha = alphas[layer];
 
-    if (this.Colid(my, otherModel)) {
-      touchingModel = { ...otherModel };
-    }
-  });
+    // Rotação inicial aleatória
+    const rotation = Math.random() * Math.PI * 2;
 
-  return touchingModel;
-}
-
-
-
-
-
-
-
-
-class Cam {
-  constructor() {
-    this.x = 0;
-    this.y = 0;
-    this.w = Math.floor(lar / scale);
-    this.h = Math.floor(alt / scale);
-    this.min = .25;
-    this.max = .75;
-  }
-  
-  left(){
-    return this.x + (this.w * this.min);
-  }
-  
-  rigth(){
-    return this.x + (this.w * this.max);
-  }
-  
-  
-  top(){
-    return this.y + (this.h * this.min);
-  }
-  
-  botton(){
-    return this.y + (this.h * this.max);
-  }
-  
-  
-  draw(){
-    ctx.strokeStyle = "#f00"
-    ctx.strokeRect(this.x + (this.min * this.w), this.y + (this.min * this.h),this.w/2,this.h/2)
-
+    backgroundShapes.push({ type, x, y, w, h, speed, alpha, rotation, layer });
   }
 }
 
+function desenharBackgroundGeometryDinamico(width, height) {
+  const time = Date.now() * 0.001; // Tempo em segundos
 
+  // 1. Limpa o fundo com a cor neon sólida pulsante (Habilidade HSL)
+  const baseHue = 260; // Roxo
+  const baseSaturation = 70;
+  const lightness = 12 + Math.sin(time * 0.5) * 8; // Oscila entre 4% e 20%
+  ctx.fillStyle = `hsl(${baseHue}, ${baseSaturation}%, ${lightness}%)`;
+  ctx.fillRect(0, 0, width, height);
 
+  // 2. Configurações para o Padrão do Grid (igual ao anterior)
+  const gridSize = 64;
+  const numCols = Math.ceil(width / gridSize) + 1;
+  const numRows = Math.ceil(height / gridSize) + 1;
 
-class Mundo {
-  constructor() {
-    var m          = lsMap[3];
-    this.img       = m.img;
-    this.size      = m.size;
-    this.li        = m.li;
-    this.co        = m.co;
-    this.map       = m.map;
-    this.nColid    = m.nColid;
-    this.colid     =[];
-    this.sw        = m.sw;
-    
-    
-    
-    for (var i = 0; i < this.map.length; i++) {
-      var px = Math.floor(i % this.li) * this.size;
-      var py = Math.floor(i / this.li) * this.size;
-    
-      if(!this.nColid.includes(this.map[i])) {
-        this.colid.push({
-          x: px,
-          y: py,
-          w: this.size,
-          h: this.size
-        })
-      }
-    }
-    
-    
-    
-    
-    
-    this.sizeW = this.size*this.li;
-    this.sizeH = this.size*this.co;
-    ctx.canvas.width  = this.sizeW;
-    ctx.canvas.height = this.sizeH;
-    ctx.canvas.style.width  =  this.sizeW*scale+"px";
-    ctx.canvas.style.height =  this.sizeH*scale+"px";
-  }
-  
-  draw(){
-    ctx.clearRect(0,0,this.sizeW,this.sizeH);
-    for(var i = 0; i< this.map.length; i++){
-        var id = this.map[i];
-        var sx = Math.floor(id%this.sw) * this.size;    
-        var sy = Math.floor(id/this.sw) * this.size;    
-        var px = Math.floor(i%this.li)  * this.size;    
-        var py = Math.floor(i/this.li)  * this.size;    
+  // Cor do padrão: Um tom ligeiramente mais claro que o fundo, com transparência
+  const patternLightness = lightness + 5;
+  ctx.strokeStyle = `hsla(${baseHue}, ${baseSaturation}%, ${patternLightness}%, 0.12)`;
+  ctx.lineWidth = 1;
 
-        
-        var obj = {
-          x: px,
-          y: py,
-          w: this.size,
-          h: this.size
-        }
-        
-         
-         if(Colid(obj, cam) && id != -1){
-           
-           ctx.drawImage(
-             this.img,
-             sx,sy,
-             this.size,this.size,
-             px,py,
-             this.size,this.size
-             );
-           
-        }
-        
-        
-        
+  // Efeito Parallax Sutil para o Grid
+  const gridOffset = (Date.now() * 0.1) % gridSize;
+
+  // Desenha o Padrão de Quadrados do Grid
+  ctx.save();
+  ctx.translate(-gridOffset, 0);
+  for (let c = 0; c < numCols; c++) {
+    for (let r = 0; r < numRows; r++) {
+      const x = c * gridSize;
+      const y = r * gridSize;
+      ctx.beginPath();
+      ctx.rect(x + 10, y + 10, gridSize - 20, gridSize - 20);
+      ctx.stroke();
     }
   }
+  ctx.restore();
+
+  // 3. Desenha as Formas Geométricas Flutuantes Grandes (com Parallax)
   
-}
+  // Garante que as formas foram geradas
+  if (backgroundShapes.length === 0) gerarFormasFundo(width, height);
 
+  for (let shape of backgroundShapes) {
+    // Atualiza a posição X baseada na velocidade da camada
+    shape.x -= shape.speed;
 
-
-
-class Play {
-  constructor() {
-    this.x       = 240;
-    this.y       = 130;
-    this.w       = 30;
-    this.h       = 30;
-    this.v       = 2;
-    this.jjump   = true;
-    this.jump    = false;
-    this.inAr    = true;
-    this.vboot   = 0;
-    this.gravity = 3;
-    this.vy      = 6;
-    this.sheet   = [[0,0]];
-    this.freme   = 0;
-    this.dlay    = 5;
-    this.isLeft  = true;
-    this.bala    = [];
-    this.dlayb   = 0;
-    this.fire    = false;
-    this.move    = false;
-  }
-  
-  
-  addBala(vv){
-    var r = vv > 0 ?  25:1;
-    this.bala.push({
-      x: this.x +r,
-      y: this.y+16,
-      w: 5,
-      h: 2,
-      v: vv
-    })
-  }
-  
-  
-  
-  draw(){
-    var f = this.sheet[this.freme] || this.sheet[0];
-  
-    ctx.drawImage(mm,f[0],f[1],this.w, this.h,this.x, this.y ,this.w, this.h);
-    
-    for(var i = 0; i< this.bala.length; i++){
-        var bala = this.bala[i];
-            bala.x += bala.v;
-        
-            ctx.fillStyle = "#f00";
-            ctx.fillRect(bala.x, bala.y, bala.w, bala.h);
-            if(!Colid(cam,bala)){
-              this.bala.splice(i,1)
-            }
+    // Se a forma sair da tela à esquerda, re-posiciona à direita
+    if (shape.x + shape.w < 0) {
+      shape.x = width + Math.random() * width;
+      shape.y = Math.random() * (height * 0.8);
     }
-  }
-  
-  
-  getFrame(){
-     
-     if (this.fire && this.inAr) {
-       return this.isLeft ? [[826, 18]] : [[825, 66]];
-     }
-     
-     else if(this.inAr){
-        return this.isLeft ? [[443,19]]  :  [[445,67]];
-      }
-      
-     else if (this.fire && this.jump && !this.move) {
-       return this.isLeft ? [[638, 13]] : [[629, 61]];
-     }
-      
-     else if(this.fire && this.move) {
-        return this.isLeft ? [[683, 13],[730,13],[779,13]] : [[680, 61],[728,61],[776,62]];
-      }
-     
-      else if(joystick.key.left || joystick.key.right){
-        return this.isLeft ? [[299,13],[344,13],[392,13]]  :  [[301,61],[352,61],[401,61]];
-      }
-      
-      else return this.isLeft ? [[155,13]] : [[158,61]];
-}
 
-  
-  update(){
-    
-    
-    const nexDow = {
-      x: this.x,
-      y: this.y + this.gravity,
-      w: this.w,
-      h: this.h,
+    // Cor da forma: Ciano neon com transparência baseada na camada
+    ctx.strokeStyle = `hsla(180, 100%, 50%, ${shape.alpha})`;
+    ctx.lineWidth = 2;
+
+    // Opcional: Adicionar brilho neon (Glow) sutil às formas mais próximas
+    if (shape.layer === 2) {
+        ctx.shadowBlur = 5;
+        ctx.shadowColor = "rgba(0, 255, 255, 0.3)";
+    } else {
+        ctx.shadowBlur = 0;
     }
-    const colidSuface = getColid(nexDow, mundo.colid);
-    const suface = colidSuface && colidSuface.y >= this.y ? colidSuface : null;
-    
-    
-    
-    if (!suface) {
-      this.inAr = true;
-      this.jump = false;
-      this.y += this.gravity;
+
+    ctx.save();
+    // Translate para o centro da forma para rotação
+    ctx.translate(shape.x + shape.w / 2, shape.y + shape.h / 2);
+    // Pequena rotação baseada no tempo para as formas mais próximas
+    if (shape.layer > 0) {
+        ctx.rotate(shape.rotation + time * (0.05 * shape.layer));
+    } else {
+        ctx.rotate(shape.rotation);
     }
-    else {
-      this.inAr = false;
-      this.jump = true;
-      this.y = suface.y - this.h;
+
+    // Desenha a forma (quadrado ou retângulo)
+    ctx.beginPath();
+    if (shape.type === "square") {
+      ctx.rect(-shape.w / 2, -shape.h / 2, shape.w, shape.h);
+    } else {
+      ctx.rect(-shape.w / 2, -shape.h / 2, shape.w, shape.h);
     }
-    
-    
-    
-    if(contro.key.btn3 || contro.key.btn4){
-      
-      this.fire = true;
-      this.dlayb--;
-      if(this.dlayb <= 0){
-        this.isLeft ? this.addBala(7):this.addBala(-7);
-        this.dlayb = 9;
-        lsSom[0].currentTime = 0;
-        lsSom[0].play();
-      }
-      
-      
-    }
-    else this.fire = false;
-    
-    
-    if(joystick.key.left) {
-      this.isLeft = false;
-      this.move    = true;
-      const nexL = {
-        x: this.x - this.v,
-        y: this.y,
-        w: this.w,
-        h: this.h
-      }
-    
-      const colidL = getColid(nexL, mundo.colid);
-      if (!colidL) {
-        this.x -= this.v;
-      }
-    }
-    
-    if(joystick.key.right) {
-      this.isLeft = true;
-      this.move    = true;
-      const nexR = {
-        x: this.x + this.v,
-        y: this.y,
-        w: this.w,
-        h: this.h
-      }
-    
-      const colidR = getColid(nexR, mundo.colid);
-      if (!colidR) {
-        this.x += this.v;
-      }
-    }
-    
-    
-    if(!joystick.key.left && !joystick.key.right){
-      this.move    = false;
-    }
-    
-    
-    
-   
-    if (contro.key.btn2 && this.jump && this.jjump) {
-      this.jjump = false;
-      this.vboot = -100;
-    }
-    else if(!contro.key.btn2){
-      this.jjump = true;
-    }
-    
-    
-    
-    
-    
-    if (this.vboot < 0) {
-   
-      const up = this.y -= this.vy;
-    
-      const colidUp = {
-        x: this.x,
-        y: up,
-        w: this.w,
-        h: this.h
-      }
-    
-      const sufaceUp = getColid(colidUp, mundo.colid);
-      if (!sufaceUp) {
-        this.y = up;
-        this.vboot = this.vboot + this.vy;
-      }
-      else this.vboot = 0;
-    }
-    
-    
-    this.sheet = this.getFrame()
-
-    
-    this.dlay--;
-    if(this.dlay <= 0){
-      this.freme++;
-      this.dlay = 5;
-      if(this.freme > this.sheet.length) {
-        this.freme = 0;
-      }
-    }
-    
-    
-    
-    
-    
-    
-    
-    if(this.x < 0) this.x = 0;
-    if(this.y < 0) this.y = 0;
-    if(this.x + this.w > mundo.sizeW) this.x = mundo.sizeW - this.w;
-    if(this.y + this.h > mundo.sizeH) this.y = mundo.sizeH - this.h;
-
-    
-    if (this.x < cam.left()) {
-       cam.x = this.x - (cam.w * cam.min);
-     }
-    if (this.x + this.w > cam.rigth()) {
-       cam.x = this.x + this.w - (cam.w * cam.max);
-     }
-     
-    if(this.y < cam.top()) {
-       cam.y = this.y - (cam.h * cam.min);
-    }
-    if(this.y + this.h > cam.botton()) {
-      cam.y = this.y + this.h - (cam.h * cam.max);
-    }
-     
-     
-     if(cam.x <= 0) cam.x = 0;
-     if(cam.y <= 0) cam.y = 0;
-     if(cam.x + cam.w >= mundo.sizeW) cam.x = mundo.sizeW - cam.w;
-     if(cam.y + cam.h >= mundo.sizeH) cam.y = mundo.sizeH - cam.h;
-
-  }
-}
-
-
-
-
-
-
-
-
-
-
-function toggleFullScreen() {
-  if ((document.fullScreenElement && document.fullScreenElement !== null) ||
-    (!document.mozFullScreen && !document.webkitIsFullScreen)) {
-    if (document.documentElement.requestFullScreen) {
-      document.documentElement.requestFullScreen();
-    } else if (document.documentElement.mozRequestFullScreen) {
-      document.documentElement.mozRequestFullScreen();
-    } else if (document.documentElement.webkitRequestFullScreen) {
-      document.documentElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
-    }
-  } else {
-    if (document.cancelFullScreen) {
-      document.cancelFullScreen();
-    } else if (document.mozCancelFullScreen) {
-      document.mozCancelFullScreen();
-    } else if (document.webkitCancelFullScreen) {
-      document.webkitCancelFullScreen();
-    }
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var scale = 1.7;
-var ctx = document.querySelector("canvas").getContext("2d");
-var lar = 400;//window.innerWidth;
-var alt = 400;//window.innerWidth;
-    divCanvas.style.width  = lar+"px";
-    divCanvas.style.height = alt+"px";
-
-
-var joystick = new Joystick(10, 20,100);
-var contro = new Contro();
-
-var cam    = new Cam();
-var mundo  = new Mundo();
-var play   = new Play();
-
-class Game {
-  constructor() {
-  this.full = false;
-  
-  document.addEventListener("click", ()=>{if(!this.full) toggleFullScreen(); this.full = true;})
-  }
-  
-  draw(){
-    ctx.save()
-    ctx.canvas.style.transform = `translate3d(${-cam.x*scale}px, ${-cam.y*scale}px, 0px)`;
-    
-    mundo.draw();
-    play.draw();
-    //cam.draw();
+    ctx.stroke();
     ctx.restore();
   }
-  
-  update(){
-    play.update();
-    
-   /*p1.innerHTML = `
-    X: ${play.x} ___y: ${play.y}<br>  
-    
-    playVboot: ${play.vboot}<br>  
-    playjump: ${play.jump}<br>  
-    playInAr: ${play.inAr}<br>  
-    lsSom: ${play.bala.length}<br>  
-    `*/
-  }
-  
-  loop(){
-      game.draw();
-      game.update();
-      
-      window.requestAnimationFrame(game.loop);
-  }
+
+  // 4. Linha de Horizonte Neon Sutil (igual ao anterior)
+  ctx.save();
+  ctx.shadowBlur = 10;
+  ctx.shadowColor = "rgba(0, 255, 255, 0.4)";
+  ctx.strokeStyle = "rgba(0, 255, 255, 0.2)";
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(0, height * 0.9);
+  ctx.lineTo(width, height * 0.9);
+  ctx.stroke();
+  ctx.restore();
 }
-
-
-
-
-
-
-
-var game = new Game(); game.loop();

@@ -142,13 +142,64 @@ function addColunas(inicio, altura, quantidade, espacamento) {
 
 
 /*********Fazes**********************/
+function oterro() {
+  let init = 600;
+  
+  return [
+    
+    /* começo leve */
+    ...addMoeda(init, 1, 3, 1.5),
+    
+    /* spikes simples */
+    ...addSpikes(init + 250, 0, 2, 1),
+    
+    /* respiro */
+    ...addMoeda(init + 420, 2, 4, 1),
+    
+    /* bloco com moeda */
+    ...addBlocos(init + 650, 0, 2, 1),
+    ...addMoeda(init + 650, 2, 2, 1),
+    
+    /* sequência de spikes */
+    ...addSpikes(init + 900, 0, 3, 1),
+    
+    /* plataforma alta */
+    ...addPlataforma(init + 1200, 3, 1, 1),
+    ...addMoeda(init + 1220, 5, 3, 1),
+    
+    /* coluna + spike */
+    ...addColunas(init + 1500, 0, 1, 1),
+    ...addSpikes(init + 1580, 0, 2, 1),
+    
+    /* teto com spike invertido */
+    ...addSpikesR(init + 1850, 5, 2, 1),
+    
+    /* bloco de apoio */
+    ...addBlocos(init + 2100, 1, 3, 1),
+    
+    /* sequência final mais rápida */
+    ...addSpikes(init + 2400, 0, 4, 1),
+    
+    /* recompensa */
+    ...addMoeda(init + 2700, 3, 5, 1),
+    
+    /* final com plataforma */
+    ...addPlataforma(init + 3000, 2, 2, 1.2),
+    ...addMoeda(init + 3050, 4, 4, 1)
+    
+  ];
+}
+
+
+
+
 function tunel() {
    let init = 500;
    let space = 7;
    return [
      
       // quando e bom o santo desconfia 
-      
+       //...addPlataforma(init, 3, 15,1),
        ...addMoeda(init, 3, 5, 7),
        ...addMoeda(init+90, 0, 5, 7),
        ...addSpikes(init+1200, 0, 5, 6),
@@ -405,12 +456,13 @@ function FaseTeste() {
     
     // entrada falsa de paz
     ...addPlataforma(300, 1, 3, 1.2),
-    
+    ...addMoeda(300, 3, 5, 1.2),
     // primeiros espinhos do destino
     ...addSpikes(500, 0, 4, 1.5),
     
     // plataforma alta + spike embaixo
     ...addPlataforma(800, 3, 2, 1.5),
+    ...addMoeda(800, 4, 3, 1.2),
     ...addSpikes(850, 0, 3, 1.2),
     
     // coluna da humilhação
@@ -427,19 +479,22 @@ function FaseTeste() {
     ...addBlocos(2100, 2, 3, 1.5),
     
     // dupla traição
-    ...addColunas(2500, 0, 2, 4),
+    ...addColunas(2500, 0, 2, 6),
     ...addSpikes(2600, 0, 3, 1.2),
     
     // escada do sofrimento
     ...addBlocos(3000, 1, 1, 1),
-    ...addBlocos(3150, 2, 1, 1),
-    ...addBlocos(3300, 3, 1, 1),
+    ...addBlocos(3200, 2, 1, 1),
+    ...addBlocos(3400, 3, 1, 1),
     
     // plataforma mentirosa
-    ...addPlataforma(3500, 4, 1, 1),
+    ...addPlataforma(3600, 4, 1, 1),
     ...addSpikes(3600, 0, 2, 1),
     
     // tribunal oficial do caos
+    ...addBlocos(4200, 1, 1, 1),
+    ...addBlocos(4400, 2, 1, 1),
+    ...addBlocos(4600, 3, 1, 1),
     ...addSpikes(4000, 0, 10, 0.9),
     
     // coluna apertada
@@ -453,6 +508,7 @@ function FaseTeste() {
     ...addBlocos(5600, 2, 4, 1.3),
     
     // mentira final
+    // pulo da salvação 
     ...addSpikes(6000, 0, 12, 0.8)
     
   ];

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>HTML</title>
+  
+  <!-- HTML -->
+  
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  
+  
+  <canvas></canvas>
+  <p id="p1">bug</p>
+  <p id="p2"></p>
+  
+  <script>
+    Colid = function(o1, o2) {
+      if (o1.x + o1.w >= o2.x &&
+        o1.y + o1.h >= o2.y &&
+        o1.x <= o2.x + o2.w &&
+        o1.y <= o2.y + o2.h
+      ) {
+        return true;
+      }
+      else return false;
+    }
+  </script>
+  
+  <script src="ia.js"></script>
+  <script src="obj.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

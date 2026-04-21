@@ -2,7 +2,73 @@
 
 
 
+class Particulas {
+   constructor(x,y) {
+      this.x = x; 
+      this.y = y;
+      //this.vx = (Math.random() + 5) * 1;
+      this.vx = Math.random() * 4 + 2;
+      this.vy = (Math.random() - 0.5) * 2;
+      this.life = 30;
+      this.opacite = 1;
+      this.size = Math.random() * 5;
+   }
+   
+   
+   update(){
+      this.x -= this.vx;
+      this.y += this.vy;
+      this.vy += 0.05;
+      
+      this.life--;
+      this.opacite = this.life/30;
+   }
+   
+   draw(){
+      ctx.save()
+         
+         ctx.globalAlpha = this.opacite;
+         ctx.beginPath()
+         ctx.fillStyle = "#E400FF";
+         ctx.fillRect(this.x, this.y, this.size,this.size);    
+         
+      ctx.restore()
+   }
+   
+   
+}
+class Part {
+   constructor() {this.ls = [];}
+   
+   add(x,y){
+      for (var i = 0; i < 2; i++) {
+          this.ls.push(new Particulas(x,y));
+      }
+   }
+   
+   
+   part() {
+      for (let i = this.ls.length - 1; i >= 0; i--) {
+        let p = this.ls[i];
+        
+        p.update();
+        p.draw();
+        
+        if (p.life <= 0) {
+          this.ls.splice(i, 1);
+        }
+      }
+    }
 
+   /*part(){
+      this.ls.forEach((p,i) =>{
+         p.update()
+         p.draw()
+         
+         if(p.life <= 0) this.ls.splice(i,1)
+      })
+   }*/
+}
 
 
 
@@ -26,12 +92,20 @@ var ctx;
 var mundo;
 var obstaculos;
 var player;
+var part;
 
 
 const som1 = new Audio();
       som1.src ="./som/jump1.mp3"
       
       
+
+
+
+
+
+
+
 
 
 
@@ -47,12 +121,13 @@ class Game {
     
     mundo  = new Mundo();
     //obstaculos = FaseTeste();
+   // obstaculos = oterro()
     //obstaculos = tribunalDoCaos()
     //obstaculos = sofrimento_Sangrento()
     //obstaculos = espinhos_Sangrentos()
     //obstaculos = gargataColosal()
-   // obstaculos = sofrimentoSupremo();
-    obstaculos = tunel();
+    obstaculos = sofrimentoSupremo();
+    //obstaculos = tunel();
     const typ = ["platform", "coluna", "block"]
     obstaculos.forEach(obs => {
       if (typ.includes(obs.type)) {
@@ -62,6 +137,7 @@ class Game {
     
     
     player = new Player();
+    part   = new Part();
     
   }
   
@@ -155,11 +231,16 @@ class Game {
   }
   draw(){
      ctx.clearRect(0,0, ctx.canvas.width, ctx.canvas.height)
+       
+     
+     
      mundo.draw();
      obstaculos.forEach(obs => {obs.draw();});
      
      
      player.draw();
+     part.add(player.x, player.y+(player.size-2))
+     part.part()
   }
   
   dbug(){

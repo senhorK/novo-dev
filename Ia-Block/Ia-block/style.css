@@ -1,0 +1,43 @@
+
+
+*{
+  margin: 0;
+  padding: 0;
+}
+
+
+
+body {
+    font-size: 15pt;
+    background: #FFFFFF
+}
+
+p{
+  position: absolute;
+  color: #FFFFFF;
+  z-index: 1
+}
+
+#p2{
+  right: 50px;
+}
+
+
+canvas{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  
+  image-rendering: pixelated
+}
+
+
+
+
+
+
+
+
+
+
