@@ -275,7 +275,7 @@ class Game {
       
       console.log("Celular");
     } else {
-      scale = 0.8;
+      scale = 1;
       lar = window.innerWidth;
       alt = window.innerHeight;
       console.log("PC");
