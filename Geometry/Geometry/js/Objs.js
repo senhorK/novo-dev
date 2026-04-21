@@ -37,22 +37,9 @@ class Mundo {
     let escala = 0.3;
     this.sprites = {
       chao: {
-        sx: 0, 
-        sy: 555, 
-        sw: 1996,
-        sh: 188,
-        
-        
-        v: 5,
-        sub: 1999 * escala, 
-       
         x: 0,
-        x2: 2000 * escala,
-        x3: (2000 * escala) * 2,
-        
-        
         y: (ctx.canvas.height-(188*escala)),
-        w:  2000 * escala,
+        w:  ctx.canvas.width,
         h: 188 * escala,
         
       }
