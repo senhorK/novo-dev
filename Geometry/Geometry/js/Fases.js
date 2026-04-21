@@ -142,6 +142,37 @@ function addColunas(inicio, altura, quantidade, espacamento) {
 
 
 /*********Fazes**********************/
+function tunel() {
+   let init = 500;
+   let space = 7;
+   return [
+     
+      // quando e bom o santo desconfia 
+      
+       ...addMoeda(init, 3, 5, 7),
+       ...addMoeda(init+90, 0, 5, 7),
+       ...addSpikes(init+1200, 0, 5, 6),
+       
+       
+       //garganta do sofrimento
+       ...addPlataforma(init+2000, 0, 15,1),
+       ...addSpikes(init+2000, 1, 8, 6),
+       ...addPlataforma(init+2000, 6, 15,1),
+       ...addSpikesR(init+2100, 5, 8, 6),
+       
+       ...addPlataforma(init+4000, 8, 6,1),
+       ...addSpikesR(init+4000, 7, 3, space),
+       
+       ...addPlataforma(init+4000, 2, 6,1),
+       ...addSpikes(init+4080, 3, 3, space),
+       
+       // espinhos sangretos
+       ...addBlocos(init+5000, 0, 2, 1),
+       ...addBlocos(init+5200, 3, 4, 14),
+       ...addBlocos(init+5450, 1, 4, 14),
+       ...addSpikes(init+5200, 0, 20, 2),
+   ]
+}
 function gargataColosal() {
     let init = 800;
     
@@ -235,6 +266,7 @@ function sofrimentoSupremo() {
     */
     ...addSpikes(5000, 0, 10, 0.9),
     ...addMoeda(5100, 2, 4, 1.5),
+    ...addBlocos(5000, 2, 3, 1),
 
     /*
     =========================

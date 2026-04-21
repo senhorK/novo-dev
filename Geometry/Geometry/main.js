@@ -51,7 +51,8 @@ class Game {
     //obstaculos = sofrimento_Sangrento()
     //obstaculos = espinhos_Sangrentos()
     //obstaculos = gargataColosal()
-    obstaculos = sofrimentoSupremo();
+   // obstaculos = sofrimentoSupremo();
+    obstaculos = tunel();
     const typ = ["platform", "coluna", "block"]
     obstaculos.forEach(obs => {
       if (typ.includes(obs.type)) {

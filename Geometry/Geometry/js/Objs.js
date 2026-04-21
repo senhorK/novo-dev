@@ -209,7 +209,7 @@ class Obstacle {
         ctx.fill();
 
       }*/
-    
+   
     else
     if (this.type === "coluna") {
       ctx.fillStyle = "#00ffff";
@@ -237,21 +237,22 @@ class Obstacle {
     else
     if(this.type === "spikeTop"){
         ctx.beginPath();
-
-// canto superior esquerdo
-ctx.moveTo(this.x, this.y);
-
-// ponta pra baixo (meio inferior)
-ctx.lineTo(this.x + this.w / 2, this.y + this.h);
-
-// canto superior direito
-ctx.lineTo(this.x + this.w, this.y);
-
-ctx.closePath();
-
-ctx.fillStyle = "#ff0055";
-ctx.fill();
-    }
+      // canto superior esquerdo
+      ctx.moveTo(this.x, this.y);
+      
+      // ponta pra baixo (meio inferior)
+      ctx.lineTo(this.x + this.w / 2, this.y + this.h);
+      
+      // canto superior direito
+      ctx.lineTo(this.x + this.w, this.y);
+      
+      ctx.closePath();
+      
+      ctx.fillStyle = "#ff0055";
+      ctx.fill();
+          }
+    
+    
   }
 }
 class Player {
